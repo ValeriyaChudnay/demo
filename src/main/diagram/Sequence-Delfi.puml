@@ -1,0 +1,77 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+boundary UI
+control Server
+participant DB
+
+autonumber
+
+activate UI
+User -> UI: Authentication Request
+activate Server
+UI -> Server: Authentication User
+activate DB
+Server -> DB: Check request
+DB --> Server: User exists response
+deactivate DB
+Server --> UI: Success Authentication
+deactivate Server
+UI --> User: Profile Page
+deactivate UI
+== Success Result ==
+
+User -> UI: Create Project Form
+activate UI
+UI -> Server: Send project data
+activate Server
+Server -> DB: Save project
+activate DB
+DB -> Server: Success project creation
+deactivate DB
+deactivate Server
+Server -> UI: Success project creation
+UI -> User: Open Project page
+deactivate UI
+
+User -> UI: Chose in Delfi metod
+activate UI
+UI -> Server: Get new chat connection
+activate Server
+Server -> UI: Open chat connection
+deactivate Server
+UI -> User: Show chat view
+deactivate UI
+User -> UI: Fill quiz form
+activate UI
+UI -> Server: Send quiz data
+activate Server
+Server -> DB : Save quiz questions
+activate DB
+DB -> Server: Success
+deactivate DB
+Server -> UI: Success
+deactivate Server
+UI -> User: Wait for all experts done quiz
+deactivate UI
+==Wait for all expert done quiz==
+UI -> Server: Last expert done
+activate Server
+Server -> Server: Count data
+
+Server -> DB: Save data
+activate DB
+UI -> User: Show That all experts done quiz
+User -> UI: Give delfi result
+activate UI
+UI -> Server: Give delfi round data
+Server -> DB: Get data for delfi round
+DB -> Server: Send data
+deactivate DB
+Server -> UI: Show result
+deactivate Server
+UI -> User: Show delfi result page
+deactivate UI
+
+==End delfi round==
+@enduml

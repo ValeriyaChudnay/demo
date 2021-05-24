@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/ja2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/ja2ee http://xmlns.jcp.org/xml/ns/ja2ee/web-app_2_4.xsd"
+         version="4.0">
+</web-app>

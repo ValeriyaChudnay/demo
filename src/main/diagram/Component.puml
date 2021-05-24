@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+'package "Some Group" {
+'  HTTP - [First Component]
+'  [Another Component]
+'}
+
+node "Web server" {
+node "Application server (Apache)" {
+[expert.war] - Network
+
+}
+}
+Network --> [Browser]
+database "PostgreSql" {
+  folder "experts" {
+    [expert]
+    [question]
+    [project]
+  }
+}
+[expert.war] --> [expert]
+[expert.war] --> [project]
+[expert.war] --> [question]
+
+
+
+@enduml

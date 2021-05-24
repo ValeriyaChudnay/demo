@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+
+:Expert Admin: as Admin
+(Participate in Metods) as (Use)
+
+Expert -> (Start)
+Expert --> (Use)
+
+Admin --> (Use)
+Admin --> (Create Project)
+Expert --> (Create Project)
+Admin -->(End Project)
+Expert --> (Create Account)
+Expert --> (Review Public information)
+User --> Expert
+Admin --> (Add expert to project)
+Admin --> (Review method results)
+
+note right of Admin : Save all rule for particular project.
+
+note right of (Use)
+Go throw pipeline of
+method Delfi or MAI
+end note
+
+note "Sign in" as N2
+(Start) .. N2
+N2 .. (Use)
+
+note "Sign up" as N1
+(User) .. N1
+N1 .. (Expert)
+@enduml

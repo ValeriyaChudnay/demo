@@ -1,0 +1,124 @@
+@startuml
+'!$BGCOLOR="w"
+'!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/cerulean/puml-theme-cerulean.puml
+
+'https://plantuml.com/class-diagram
+
+
+interface ExpertDao{
+ List<Expert> findAll();
+    Expert getExpertByEmail(String email);
+    Expert createExpert(String email, String password, String score, String name,String organizationCode);
+    List<Expert> getExpertsByProjectId(int id);
+    List<Expert> getExpertsByOrganization(String organizationCode);
+}
+interface ProjectDao{
+List<Project> findAll();
+    List<Project> getProjectsAdmin(int id);
+    List<Project> getProjectsMember(int id);
+    Project getProjectById(int projectId);
+    void updateDelfiEtap(int etap,int projectId);
+    int save(Project project);
+    void saveDelfiResult(int id, int currentRound, String json);
+    String getDelfiResult(int id, int round);
+    void endProject(int id);
+    void addConectionExpertProject(int expertId, int projectId);
+    void updateDelfiRound(int delfiround, int id);
+}
+interface QuestionDao{
+int save(Question q);
+    List<Question> getQuestionByProjectId(int projectId);
+    void update(Question question);
+    void removeQuestionsByProjectId(int id);
+    }
+
+
+
+interface ExpertService{
+  List<Expert> findAll();
+    Expert getExpertByEmailAndPassword(String email, String password);
+    Expert createExpert(String email, String password, String score,String name, String organizationCode);
+    List<Expert> getExpertsByProjectId(int parseInt);
+    List<Expert> getExpertsByOrganization(String organizationCode);
+}
+
+interface ProjectService{
+ List<Project> getProjectsAdmin(int id);
+    ProjectDao getProjectDao();
+    void setProjectDao(ProjectDao projectDao);
+    List<Project> getProjectsMember(int id);
+    Project getProjectById(int projectId);
+    void updateDelfiEtap(int i, int projectId);
+    int save(Project project);
+    void saveDelfiResult(DelfiTempoparyData dtd, int id, int currentRound);
+    DelfiTempoparyData getDelfiResult(int id, int round);
+    void endProject(int id);
+    void addConectionExpertProject(int expertId, int projectId);
+    Map<Integer, DelfiTempoparyData> getDtd();
+    void setDtd(Map<Integer, DelfiTempoparyData> dtd);
+    void updateDelfiRound(int delfiround, int id);
+}
+interface QuestionService{
+   int save(Question q);
+    List<Question> getQuestionByProjectId(int projectId);
+    void update(Question question);
+    void removeQuestionsByProjectId(int id);
+}
+
+class ExpertServiceImpl
+class ProjectServiceImpl
+class QuestionServiceImpl
+
+class ExpertDaoImpl{
+private final JdbcTemplate jdbcTemplate;
+}
+class ProjectDaoImpl{
+private final JdbcTemplate jdbcTemplate;
+}
+class QuestionDaoImpl{
+private final JdbcTemplate jdbcTemplate;
+}
+
+ExpertDao <|-- ExpertDaoImpl
+ProjectDao <|-- ProjectDaoImpl
+QuestionDao <|-- QuestionDaoImpl
+
+ExpertService <|-- ExpertServiceImpl
+ProjectService <|-- ProjectServiceImpl
+QuestionService <|-- QuestionServiceImpl
+
+class ExpertController
+class DelfiController
+class MAIController
+class ChatController
+
+'class WebConfig
+'class SpringConfig
+'WebConfig <|-- DelfiController
+'WebConfig <|-- ChatController
+'WebConfig <|-- ExpertController
+'WebConfig <|-- MAIController
+
+DelfiController <-- ExpertService
+DelfiController <-- ProjectService
+DelfiController <-- QuestionService
+
+ExpertController <-- ExpertService
+
+MAIController <-- ProjectService
+
+ExpertService <-- ExpertDao
+ProjectService <-- ProjectDao
+QuestionService <-- QuestionDao
+
+'class Project
+'class Question
+'class Expert
+'class MAI
+
+
+
+
+
+
+@enduml
